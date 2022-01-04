@@ -1,57 +1,57 @@
 <div class="col mx-5 ">
-<% if @space.user_id == @user.id %>
-  <div class="row" style="margin: 50px;">
-    <div class="d-flex justify-content-center">
-      <form action="/spaces/<%= @space.id %>/edit">
-        <input class="btn-lg btn-danger" type="submit" name="EDIT THIS LISTING" value="EDIT THIS LISTING">
-      </form>
-    </div>
-  </div>
-<% end %>
-<div class="row">
- <div class="px-4 mt-3 text-center">
-   <h1 class="display-5 fw-bold"><%= @space.name%></h1>
-   <div class="col-lg-6 mx-auto">
-     <p class="lead mb-2"><%= @space.description %></p>
-     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <div class="input-group w-25 m-1">
-          <span class="input-group-text">£</span>
-          <span type="text" name="price" class="form-control px-2 text-nowrap" id="listing-price"
-            aria-label="Amount (to the nearest dollar)"><%= @space.price %><small class="fst-italic text-muted"> per
-              night </small></span>
+  <% if @user %>
+    <% if @space.user_id == @user.id %>
+      <div class="row" style="margin: 50px;">
+        <div class="d-flex justify-content-center">
+          <form action="/spaces/<%= @space.id %>/edit">
+            <input class="btn-lg btn-danger" type="submit" name="EDIT THIS LISTING" value="EDIT THIS LISTING">
+          </form>
         </div>
-     </div>
-   </div>
- </div>
-</div>
-<div class="row">
-<div class="container col-xxl-8 px-4 py-2">
-  <div class="row flex-lg-row align-items-center g-5 py-5 justify-content-center">
-    <div class="col-10 col-sm-8 col-lg-6 d-flex align-items-center ">
-      <img src="<%=@space.url %>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-        height="500" loading="lazy">
-    </div>
-    <div class="col-lg-6 d-flex flex-column align-items-center">
-      <h4 class="display-5 fw-bold lh-1 mb-3">Available Dates</h4>
-<ul class="d-flex list-group list-group-horizontal flex-wrap align-items-right justify-content-between w-50">
-  <% @availability.each do |date| %>
-  <li class="w-14 list-group-item d-flex p-0" id="list-group-item">
-    <form action="/bookings/new" method="post">
-      <button class="btn-light btn-outline-danger btn my-2" type="submit" name="start_date" id="listing_fromdate"
-        value="<%= date %>">
-        <%= Date::strptime(date, "%Y-%m-%d").strftime('%d %b %y') %>
-      </button>
-      <input type="hidden" name="end_date" id="listing_todate" value="<%= date %>">
-      <input type="hidden" name="space_id" value="<%= @space.id %>">
-      <input type="hidden" name="host_id" value="<%= @space.user_id %>">
-    </form>
-  </li>
+      </div>
+    <% end %>
   <% end %>
-</ul>
+    <div class="row">
+      <div class="px-4 mt-3 text-center">
+        <h1 class="display-5 fw-bold"><%= @space.name%></h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-2"><%= @space.description %></p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <div class="input-group w-25 m-1">
+              <span class="input-group-text">£</span>
+              <span type="text" name="price" class="form-control px-2 text-nowrap" id="listing-price"
+            aria-label="Amount (to the nearest dollar)"><%= @space.price %><small class="fst-italic text-muted"> per
+                  night </small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container col-xxl-8 px-4 py-2">
+        <div class="row flex-lg-row align-items-center g-5 py-5 justify-content-center">
+          <div class="col-10 col-sm-8 col-lg-6 d-flex align-items-center ">
+            <img src="<%=@space.url %>" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+        height="500" loading="lazy">
+          </div>
+          <div class="col-lg-6 d-flex flex-column align-items-center">
+            <h4 class="display-5 fw-bold lh-1 mb-3">Available Dates</h4>
+            <ul class="d-flex list-group list-group-horizontal flex-wrap align-items-right justify-content-between w-50">
+              <% @availability.each do |date| %>
+                <li class="w-14 list-group-item d-flex p-0" id="list-group-item">
+                  <form action="/bookings/new" method="post">
+                    <button class="btn-light btn-outline-danger btn my-2" type="submit" name="start_date" id="listing_fromdate"
+        value="<%= date %>">
+                      <%= Date::strptime(date, "%Y-%m-%d").strftime('%d %b %y') %>
+                    </button>
+                    <input type="hidden" name="end_date" id="listing_todate" value="<%= date %>">
+                    <input type="hidden" name="space_id" value="<%= @space.id %>">
+                    <input type="hidden" name="host_id" value="<%= @space.user_id %>">
+                  </form>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-  
-</div>
-
